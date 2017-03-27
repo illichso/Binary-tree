@@ -4,14 +4,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static illich.so.BinaryTreeUtil.findNodeByKey;
-import static illich.so.BinaryTreeUtil.insertNode;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 
 public class BinaryTreeTest {
     private static BinaryTree binaryTree;
-    private static Node root;
+    private static Node boss;
     private static Node visePres;
     private static Node officeManager;
     private static Node secretary;
@@ -20,7 +19,7 @@ public class BinaryTreeTest {
 
     @BeforeClass
     public static void init() throws Exception {
-        root = new Node(50, "Boss");
+        boss = new Node(50, "Boss");
         visePres = new Node(25, "Vise Pres");
         officeManager = new Node(15, "Office Manager");
         secretary = new Node(30, "Secretary");
@@ -37,7 +36,7 @@ public class BinaryTreeTest {
     public void testAddNode() throws Exception {
         addDefinedNodes();
 
-        assertEquals(binaryTree.getRoot(), root);
+        assertEquals(binaryTree.getRoot(), boss);
         assertEquals(binaryTree.getRoot().getLeftChild(), visePres);
         assertEquals(binaryTree.getRoot().getLeftChild().getLeftChild(), officeManager);
         assertEquals(binaryTree.getRoot().getLeftChild().getRightChild(), secretary);
@@ -54,7 +53,7 @@ public class BinaryTreeTest {
     }
 
     private void addDefinedNodes() {
-        binaryTree.addNode(root.getKey(), root.getName());
+        binaryTree.addNode(boss.getKey(), boss.getName());
         binaryTree.addNode(visePres.getKey(), visePres.getName());
         binaryTree.addNode(officeManager.getKey(), officeManager.getName());
         binaryTree.addNode(secretary.getKey(), secretary.getName());
@@ -66,8 +65,11 @@ public class BinaryTreeTest {
     public void testFindNodeByKey() throws Exception {
         addDefinedNodes();
 
-        Node foundNode = findNodeByKey(binaryTree.getRoot(), 15);
-        assertEquals(officeManager, foundNode);
+        Node foundNodeOfficeManager = binaryTree.findNodeByKey(binaryTree.getRoot(), 15);
+        Node foundBoss = binaryTree.findNodeByKey(binaryTree.getRoot(), 50);
+
+        assertEquals(officeManager, foundNodeOfficeManager);
+        assertEquals(boss, foundBoss);
     }
 
     @Test
@@ -75,10 +77,22 @@ public class BinaryTreeTest {
         addDefinedNodes();
 
         Node salesman2 = new Node(60, "Salesman 2");
-        insertNode(salesman2);
+        binaryTree.insertNode(salesman2);
 
-        Node foundNode = findNodeByKey(binaryTree.getRoot(), salesman2.getKey());
+        Node foundNode = binaryTree.findNodeByKey(binaryTree.getRoot(), salesman2.getKey());
         assertEquals(salesman2, foundNode);
 
+    }
+
+    @Test
+    public void testOverrideNode() throws Exception {
+        addDefinedNodes();
+
+        Node salesman3 = new Node(30, "Secretary Substitute");
+        binaryTree.insertNode(salesman3);
+
+        Node foundNode = binaryTree.findNodeByKey(binaryTree.getRoot(), salesman3.getKey());
+        assertEquals(salesman3, foundNode);
+        assertNotEquals(secretary, foundNode);
     }
 }

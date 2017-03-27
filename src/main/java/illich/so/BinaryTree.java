@@ -46,9 +46,47 @@ public class BinaryTree {
         }
     }
 
+    public Node findNodeByKey(Node node, int key) {
+        if (node == null) {
+            return null;
+        }
+
+        if (key == node.getKey()) {
+            return node;
+        } else if (key > node.getKey()) {
+            return findNodeByKey(node.getRightChild(), key);
+        } else {
+            return findNodeByKey(node.getLeftChild(), key);
+        }
+
+    }
 
 
     public void insertNode(Node node) {
+        if (root == null) {
+            root = node;
+            return;
+        }
+
+        Node focusNode = root;
+        Node parent;
+
+        while (true) {
+            parent = focusNode;
+            if (node.getKey() < focusNode.getKey()) {
+                focusNode = focusNode.getLeftChild();
+                if (focusNode == null || focusNode.getKey() == node.getKey()) {
+                    parent.setLeftChild(node);
+                    return;
+                }
+            } else {
+                focusNode = focusNode.getRightChild();
+                if (focusNode == null || focusNode.getKey() == node.getKey()) {
+                    parent.setRightChild(node);
+                    return;
+                }
+            }
+        }
 
     }
 }

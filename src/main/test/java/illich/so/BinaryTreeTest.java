@@ -33,19 +33,7 @@ public class BinaryTreeTest {
 
     @Test
     public void testAddNode() throws Exception {
-        Node root = new Node(50, "Boss");
-        Node visePres = new Node(25, "Vise Pres");
-        Node officeManager = new Node(15, "Office Manager");
-        Node secretary = new Node(30, "Secretary");
-        Node salesManager = new Node(75, "Sales Manager");
-        Node salesman1 = new Node(85, "Salesman 1");
-
-        binaryTree.addNode(root.getKey(), root.getName());
-        binaryTree.addNode(visePres.getKey(), visePres.getName());
-        binaryTree.addNode(officeManager.getKey(), officeManager.getName());
-        binaryTree.addNode(secretary.getKey(), secretary.getName());
-        binaryTree.addNode(salesManager.getKey(), salesManager.getName());
-        binaryTree.addNode(salesman1.getKey(), salesman1.getName());
+        addDefinedNodes();
 
         assertEquals(binaryTree.getRoot(), root);
         assertEquals(binaryTree.getRoot().getLeftChild(), visePres);
@@ -63,24 +51,32 @@ public class BinaryTreeTest {
         assertNull(binaryTree.getRoot().getRightChild().getRightChild().getRightChild());
     }
 
-    @Test
-    public void testFindNodeByKey() throws Exception {
-
-        Node root = new Node(50, "Boss");
-        Node visePres = new Node(25, "Vise Pres");
-        Node officeManager = new Node(15, "Office Manager");
-        Node secretary = new Node(30, "Secretary");
-        Node salesManager = new Node(75, "Sales Manager");
-        Node salesman1 = new Node(85, "Salesman 1");
-
+    private void addDefinedNodes() {
         binaryTree.addNode(root.getKey(), root.getName());
         binaryTree.addNode(visePres.getKey(), visePres.getName());
         binaryTree.addNode(officeManager.getKey(), officeManager.getName());
         binaryTree.addNode(secretary.getKey(), secretary.getName());
         binaryTree.addNode(salesManager.getKey(), salesManager.getName());
         binaryTree.addNode(salesman1.getKey(), salesman1.getName());
+    }
 
-        Node foundNode = binaryTree.findNodeByKey(binaryTree.getRoot(), 15);
+    @Test
+    public void testFindNodeByKey() throws Exception {
+        addDefinedNodes();
+
+        Node foundNode = BinaryTreeUtil.findNodeByKey(binaryTree.getRoot(), 15);
         assertEquals(officeManager, foundNode);
+    }
+
+    @Test
+    public void testInsertNode() throws Exception {
+        addDefinedNodes();
+
+        Node salesman2 = new Node(60, "Salesman 2");
+        BinaryTreeUtil.insertNode(salesman2);
+
+        Node foundNode = BinaryTreeUtil.findNodeByKey(binaryTree.getRoot(), salesman2.getKey());
+        assertEquals(salesman2, foundNode);
+
     }
 }

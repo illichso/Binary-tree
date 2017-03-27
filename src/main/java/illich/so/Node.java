@@ -1,9 +1,13 @@
 package illich.so;
 
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@Getter
+@Setter
+@ToString(exclude={"leftChild", "rightChild"})
 public class Node {
 
     private int key;
@@ -15,13 +19,5 @@ public class Node {
     public Node(int key, String name) {
         this.key = key;
         this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "Node{" +
-                "key=" + key +
-                ", name='" + name + '\'' +
-                '}';
     }
 }

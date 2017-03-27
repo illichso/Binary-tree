@@ -42,7 +42,6 @@ public class BinaryTree {
             inOrderTraverseTree(focusNode.getLeftChild());
             System.out.println(focusNode);
             inOrderTraverseTree(focusNode.getRightChild());
-
         }
     }
 

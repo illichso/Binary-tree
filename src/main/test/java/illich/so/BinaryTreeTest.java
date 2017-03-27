@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static illich.so.BinaryTreeUtil.findNodeByKey;
+import static illich.so.BinaryTreeUtil.insertNode;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
@@ -64,7 +66,7 @@ public class BinaryTreeTest {
     public void testFindNodeByKey() throws Exception {
         addDefinedNodes();
 
-        Node foundNode = BinaryTreeUtil.findNodeByKey(binaryTree.getRoot(), 15);
+        Node foundNode = findNodeByKey(binaryTree.getRoot(), 15);
         assertEquals(officeManager, foundNode);
     }
 
@@ -73,9 +75,9 @@ public class BinaryTreeTest {
         addDefinedNodes();
 
         Node salesman2 = new Node(60, "Salesman 2");
-        BinaryTreeUtil.insertNode(salesman2);
+        insertNode(salesman2);
 
-        Node foundNode = BinaryTreeUtil.findNodeByKey(binaryTree.getRoot(), salesman2.getKey());
+        Node foundNode = findNodeByKey(binaryTree.getRoot(), salesman2.getKey());
         assertEquals(salesman2, foundNode);
 
     }

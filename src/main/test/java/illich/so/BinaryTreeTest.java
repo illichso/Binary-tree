@@ -65,7 +65,22 @@ public class BinaryTreeTest {
 
     @Test
     public void testFindNodeByKey() throws Exception {
-        Node foundNode = binaryTree.findNodeByKey(15);
-        assertEquals(foundNode, officeManager);
+
+        Node root = new Node(50, "Boss");
+        Node visePres = new Node(25, "Vise Pres");
+        Node officeManager = new Node(15, "Office Manager");
+        Node secretary = new Node(30, "Secretary");
+        Node salesManager = new Node(75, "Sales Manager");
+        Node salesman1 = new Node(85, "Salesman 1");
+
+        binaryTree.addNode(root.getKey(), root.getName());
+        binaryTree.addNode(visePres.getKey(), visePres.getName());
+        binaryTree.addNode(officeManager.getKey(), officeManager.getName());
+        binaryTree.addNode(secretary.getKey(), secretary.getName());
+        binaryTree.addNode(salesManager.getKey(), salesManager.getName());
+        binaryTree.addNode(salesman1.getKey(), salesman1.getName());
+
+        Node foundNode = binaryTree.findNodeByKey(binaryTree.getRoot(), 15);
+        assertEquals(officeManager, foundNode);
     }
 }

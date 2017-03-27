@@ -90,7 +90,28 @@ public class BinaryTree {
 
     }
 
-    public void removeNode(Node visePres) {
+    public void removeNode(Node node) {
+        if (root == null) {
+            return;
+        }
+        Node focusNode = root;
+        Node parent;
 
+        while (true) {
+            parent = focusNode;
+            if (node.getKey() < focusNode.getKey()) {
+                focusNode = focusNode.getLeftChild();
+                if (focusNode.getKey() == node.getKey()) {
+                    parent.setLeftChild(null);
+                    return;
+                }
+            } else {
+                focusNode = focusNode.getRightChild();
+                if (focusNode.getKey() == node.getKey()) {
+                    parent.setRightChild(null);
+                    return;
+                }
+            }
+        }
     }
 }

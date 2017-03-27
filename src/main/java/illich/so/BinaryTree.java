@@ -36,6 +36,7 @@ public class BinaryTree {
 
     }
 
+
     public void inOrderTraverseTree(Node focusNode) {
         if (focusNode != null) {
             inOrderTraverseTree(focusNode.getLeftChild());

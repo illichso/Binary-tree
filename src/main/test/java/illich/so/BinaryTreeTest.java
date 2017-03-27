@@ -1,16 +1,30 @@
-package illichso.so;
+package illich.so;
 
-import illich.so.BinaryTree;
-import illich.so.Node;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 public class BinaryTreeTest {
     private static BinaryTree binaryTree;
+    private static Node root;
+    private static Node visePres;
+    private static Node officeManager;
+    private static Node secretary;
+    private static Node salesManager;
+    private static Node salesman1;
+
+    @BeforeClass
+    public static void init() throws Exception {
+        root = new Node(50, "Boss");
+        visePres = new Node(25, "Vise Pres");
+        officeManager = new Node(15, "Office Manager");
+        secretary = new Node(30, "Secretary");
+        salesManager = new Node(75, "Sales Manager");
+        salesman1 = new Node(85, "Salesman 1");
+    }
 
     @Before
     public void setUp() throws Exception {
@@ -50,14 +64,8 @@ public class BinaryTreeTest {
     }
 
     @Test
-    public void testInOrderTraverseTree() throws Exception {
-        Node root = new Node(50, "Boss");
-        binaryTree.addNode(root.getKey(), root.getName());
-        assertEquals(binaryTree.getRoot(), root);
-    }
-
-    @Test
-    public void testRemoveNode() throws Exception {
-
+    public void testFindNodeByKey() throws Exception {
+        Node foundNode = binaryTree.findNodeByKey(15);
+        assertEquals(foundNode, officeManager);
     }
 }

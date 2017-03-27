@@ -45,4 +45,8 @@ public class BinaryTree {
 
         }
     }
+
+    public Node findNodeByKey(int key) {
+        return null;
+    }
 }

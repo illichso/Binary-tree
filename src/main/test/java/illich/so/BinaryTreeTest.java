@@ -93,6 +93,29 @@ public class BinaryTreeTest {
 
         Node foundNode = binaryTree.findNodeByKey(binaryTree.getRoot(), salesman3.getKey());
         assertEquals(salesman3, foundNode);
+        assertEquals(salesman3.getKey(), foundNode.getKey());
         assertNotEquals(secretary, foundNode);
+        assertEquals(secretary.getKey(), foundNode.getKey());
+    }
+
+    @Test
+    public void testRemoveNode() throws Exception {
+        addDefinedNodes();
+
+        binaryTree.removeNode(visePres);
+
+        assertEquals(binaryTree.getRoot(), boss);
+        assertEquals(binaryTree.getRoot().getLeftChild(), officeManager);
+        assertEquals(binaryTree.getRoot().getRightChild(), secretary);
+
+        assertNull(binaryTree.getRoot().getLeftChild().getLeftChild().getLeftChild());
+        assertNull(binaryTree.getRoot().getLeftChild().getLeftChild().getRightChild());
+
+        assertEquals(binaryTree.getRoot().getRightChild(), salesManager);
+
+        assertNull(binaryTree.getRoot().getRightChild().getLeftChild());
+        assertEquals(binaryTree.getRoot().getRightChild().getRightChild(), salesman1);
+        assertNull(binaryTree.getRoot().getRightChild().getRightChild().getLeftChild());
+        assertNull(binaryTree.getRoot().getRightChild().getRightChild().getRightChild());
     }
 }

@@ -89,4 +89,8 @@ public class BinaryTree {
         }
 
     }
+
+    public void removeNode(Node visePres) {
+
+    }
 }

@@ -20,13 +20,13 @@ public class BinaryTree {
                 parent = focusNode;
                 if (key < focusNode.getKey()) {
                     focusNode = focusNode.getLeftChild();
-                    if (focusNode == null) {
+                    if (focusNode == null || focusNode.getKey() == key) {
                         parent.setLeftChild(newNode);
                         return;
                     }
                 } else {
                     focusNode = focusNode.getRightChild();
-                    if (focusNode == null) {
+                    if (focusNode == null || focusNode.getKey() == key) {
                         parent.setRightChild(newNode);
                         return;
                     }

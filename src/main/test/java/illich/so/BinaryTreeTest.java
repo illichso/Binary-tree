@@ -62,10 +62,21 @@ public class BinaryTreeTest {
     }
 
     @Test
-    public void testFindNodeByKey() throws Exception {
+    public void testFindNodeWithRootByKey() throws Exception {
         addDefinedNodes();
 
         Node foundNodeOfficeManager = binaryTree.findNodeByKey(binaryTree.getRoot(), 15);
+        Node foundBoss = binaryTree.findNodeByKey(binaryTree.getRoot(), 50);
+
+        assertEquals(officeManager, foundNodeOfficeManager);
+        assertEquals(boss, foundBoss);
+    }
+
+    @Test
+    public void testFindNodeByKey() throws Exception {
+        addDefinedNodes();
+
+        Node foundNodeOfficeManager = binaryTree.findNodeByKey(15);
         Node foundBoss = binaryTree.findNodeByKey(binaryTree.getRoot(), 50);
 
         assertEquals(officeManager, foundNodeOfficeManager);

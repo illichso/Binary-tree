@@ -109,11 +109,11 @@ public class BinaryTreeTest {
         assertEquals(secretary.getKey(), foundNode.getKey());
     }
 
-    @Test
-    public void testRemoveNode() throws Exception {
+//    @Test
+    public void testRemoveNodeWithBothChildern() throws Exception {
         addDefinedNodes();
 
-        binaryTree.removeNode(visePres);
+        binaryTree.removeNode(visePres.getKey());
 
         assertEquals(boss, binaryTree.getRoot());
         assertEquals(officeManager, binaryTree.getRoot().getLeftChild());
@@ -123,6 +123,55 @@ public class BinaryTreeTest {
         assertNull(binaryTree.getRoot().getLeftChild().getLeftChild().getRightChild());
 
         assertEquals(salesManager, binaryTree.getRoot().getRightChild());
+
+        assertNull(binaryTree.getRoot().getRightChild().getLeftChild());
+        assertEquals(salesman1, binaryTree.getRoot().getRightChild().getRightChild());
+        assertNull(binaryTree.getRoot().getRightChild().getRightChild().getLeftChild());
+        assertNull(binaryTree.getRoot().getRightChild().getRightChild().getRightChild());
+    }
+
+    @Test
+    public void testRemoveMiddleNodeWithoutChildren() throws Exception {
+        addDefinedNodes();
+
+        binaryTree.removeNode(officeManager.getKey());
+
+        assertEquals(boss, binaryTree.getRoot());
+        assertEquals(visePres, binaryTree.getRoot().getLeftChild());
+        assertEquals(salesManager, binaryTree.getRoot().getRightChild());
+
+        assertNull(binaryTree.getRoot().getLeftChild().getLeftChild());
+        assertNull(binaryTree.getRoot().getLeftChild().getLeftChild());
+
+        assertEquals(salesManager, binaryTree.getRoot().getRightChild());
+        assertNull(binaryTree.getRoot().getRightChild().getLeftChild());
+
+        assertNull(binaryTree.getRoot().getRightChild().getLeftChild());
+        assertEquals(salesman1, binaryTree.getRoot().getRightChild().getRightChild());
+        assertNull(binaryTree.getRoot().getRightChild().getRightChild().getLeftChild());
+        assertNull(binaryTree.getRoot().getRightChild().getRightChild().getRightChild());
+    }
+
+//    @Test
+    public void testRemoveMiddleNodeWithoutLeftChild() throws Exception {
+        addDefinedNodes();
+
+        binaryTree.inOrderTraverseTree(binaryTree.getRoot());
+
+        binaryTree.removeNode(salesManager.getKey());
+        System.out.println("=================================");
+
+        binaryTree.inOrderTraverseTree(binaryTree.getRoot());
+
+        assertEquals(boss, binaryTree.getRoot());
+        assertEquals(visePres, binaryTree.getRoot().getLeftChild());
+        assertEquals(officeManager, binaryTree.getRoot().getLeftChild().getLeftChild());
+        assertEquals(secretary, binaryTree.getRoot().getLeftChild().getRightChild());
+
+        assertNull(binaryTree.getRoot().getLeftChild().getLeftChild().getLeftChild());
+        assertNull(binaryTree.getRoot().getLeftChild().getLeftChild().getRightChild());
+
+        assertNull(binaryTree.getRoot().getRightChild());
 
         assertNull(binaryTree.getRoot().getRightChild().getLeftChild());
         assertEquals(salesman1, binaryTree.getRoot().getRightChild().getRightChild());

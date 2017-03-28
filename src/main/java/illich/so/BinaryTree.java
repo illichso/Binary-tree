@@ -106,7 +106,7 @@ public class BinaryTree {
 
     }
 
-    public void removeNode(Node node) {
+    public void removeNode(int key) {
         if (root == null) {
             return;
         }
@@ -115,18 +115,18 @@ public class BinaryTree {
 
         while (true) {
             parent = focusNode;
-            if (node.getKey() == focusNode.getKey()) {
+            if (key == focusNode.getKey()) {
                 removeSpecifiedNode(parent, focusNode);
                 return;
-            } else if (node.getKey() < focusNode.getKey()) {
+            } else if (key < focusNode.getKey()) {
                 focusNode = focusNode.getLeftChild();
-                if (focusNode.getKey() == node.getKey()) {
+                if (focusNode.getKey() == key) {
                     removeSpecifiedNode(parent, focusNode);
                     return;
                 }
             } else {
                 focusNode = focusNode.getRightChild();
-                if (focusNode.getKey() == node.getKey()) {
+                if (focusNode.getKey() == key) {
                     removeSpecifiedNode(parent, focusNode);
                     return;
                 }
@@ -146,7 +146,7 @@ public class BinaryTree {
                 focusNode.getRightChild().setLeftChild(focusNode.getLeftChild());
                 parent.setLeftChild(focusNode.getRightChild());
             } else {
-
+                System.out.println(focusNode);
             }
         }
     }

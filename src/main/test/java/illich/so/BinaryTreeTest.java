@@ -10,21 +10,21 @@ import static org.junit.Assert.assertNull;
 
 public class BinaryTreeTest {
     private static BinaryTree binaryTree;
-    private static Node boss;
-    private static Node visePres;
-    private static Node officeManager;
-    private static Node secretary;
-    private static Node salesManager;
-    private static Node salesman1;
+    private static Node boss50;
+    private static Node visePres25;
+    private static Node officeManager15;
+    private static Node secretary30;
+    private static Node salesManager75;
+    private static Node salesman85;
 
     @BeforeClass
     public static void init() throws Exception {
-        boss = new Node(50, "Boss");
-        visePres = new Node(25, "Vise Pres");
-        officeManager = new Node(15, "Office Manager");
-        secretary = new Node(30, "Secretary");
-        salesManager = new Node(75, "Sales Manager");
-        salesman1 = new Node(85, "Salesman 1");
+        boss50 = new Node(50, "Boss");
+        visePres25 = new Node(25, "Vise Pres");
+        officeManager15 = new Node(15, "Office Manager");
+        secretary30 = new Node(30, "Secretary");
+        salesManager75 = new Node(75, "Sales Manager");
+        salesman85 = new Node(85, "Salesman 1");
     }
 
     @Before
@@ -32,33 +32,109 @@ public class BinaryTreeTest {
         binaryTree = new BinaryTree();
     }
 
+    private void addDefinedNodes() {
+        binaryTree.addNode(boss50.getKey(), boss50.getName());
+        binaryTree.addNode(visePres25.getKey(), visePres25.getName());
+        binaryTree.addNode(officeManager15.getKey(), officeManager15.getName());
+        binaryTree.addNode(secretary30.getKey(), secretary30.getName());
+        binaryTree.addNode(salesManager75.getKey(), salesManager75.getName());
+        binaryTree.addNode(salesman85.getKey(), salesman85.getName());
+
+        printTree();
+    }
+
+    private void printTree() {
+        binaryTree.inOrderTraverseTree(binaryTree.getRoot());
+        System.out.println("=====================================");
+    }
+
     @Test
-    public void testAddNode() throws Exception {
+    public void testCreateBinaryTree() throws Exception {
         addDefinedNodes();
 
-        assertEquals(boss, binaryTree.getRoot());
-        assertEquals(visePres, binaryTree.getRoot().getLeftChild());
-        assertEquals(officeManager, binaryTree.getRoot().getLeftChild().getLeftChild());
-        assertEquals(secretary, binaryTree.getRoot().getLeftChild().getRightChild());
+        assertEquals(boss50, binaryTree.getRoot());
+
+        assertEquals(visePres25, binaryTree.getRoot().getLeftChild());
+        assertEquals(salesManager75, binaryTree.getRoot().getRightChild());
+
+        assertEquals(officeManager15, binaryTree.getRoot().getLeftChild().getLeftChild());
+        assertEquals(secretary30, binaryTree.getRoot().getLeftChild().getRightChild());
 
         assertNull(binaryTree.getRoot().getLeftChild().getLeftChild().getLeftChild());
         assertNull(binaryTree.getRoot().getLeftChild().getLeftChild().getRightChild());
 
-        assertEquals(salesManager, binaryTree.getRoot().getRightChild());
+        assertNull(binaryTree.getRoot().getLeftChild().getRightChild().getLeftChild());
+        assertNull(binaryTree.getRoot().getLeftChild().getRightChild().getRightChild());
 
         assertNull(binaryTree.getRoot().getRightChild().getLeftChild());
-        assertEquals(salesman1, binaryTree.getRoot().getRightChild().getRightChild());
+        assertEquals(salesman85, binaryTree.getRoot().getRightChild().getRightChild());
+
         assertNull(binaryTree.getRoot().getRightChild().getRightChild().getLeftChild());
         assertNull(binaryTree.getRoot().getRightChild().getRightChild().getRightChild());
     }
 
-    private void addDefinedNodes() {
-        binaryTree.addNode(boss.getKey(), boss.getName());
-        binaryTree.addNode(visePres.getKey(), visePres.getName());
-        binaryTree.addNode(officeManager.getKey(), officeManager.getName());
-        binaryTree.addNode(secretary.getKey(), secretary.getName());
-        binaryTree.addNode(salesManager.getKey(), salesManager.getName());
-        binaryTree.addNode(salesman1.getKey(), salesman1.getName());
+    @Test
+    public void testInsertNode() throws Exception {
+        addDefinedNodes();
+
+        Node salesman3 = new Node(35, "Secretary2");
+
+        binaryTree.addNode(salesman3.getKey(), salesman3.getName());
+
+        printTree();
+
+        assertEquals(boss50, binaryTree.getRoot());
+
+        assertEquals(visePres25, binaryTree.getRoot().getLeftChild());
+        assertEquals(salesManager75, binaryTree.getRoot().getRightChild());
+
+        assertEquals(officeManager15, binaryTree.getRoot().getLeftChild().getLeftChild());
+        assertEquals(secretary30, binaryTree.getRoot().getLeftChild().getRightChild());
+
+        assertNull(binaryTree.getRoot().getLeftChild().getLeftChild().getLeftChild());
+        assertNull(binaryTree.getRoot().getLeftChild().getLeftChild().getRightChild());
+
+        assertNull(binaryTree.getRoot().getLeftChild().getRightChild().getLeftChild());
+        assertEquals(salesman3, binaryTree.getRoot().getLeftChild().getRightChild().getRightChild());
+
+        assertNull(binaryTree.getRoot().getLeftChild().getRightChild().getRightChild().getLeftChild());
+        assertNull(binaryTree.getRoot().getLeftChild().getRightChild().getRightChild().getRightChild());
+
+        assertNull(binaryTree.getRoot().getRightChild().getLeftChild());
+        assertEquals(salesman85, binaryTree.getRoot().getRightChild().getRightChild());
+
+        assertNull(binaryTree.getRoot().getRightChild().getRightChild().getLeftChild());
+        assertNull(binaryTree.getRoot().getRightChild().getRightChild().getRightChild());
+    }
+
+    @Test
+    public void testInsertNodeWithTheSameKey() throws Exception {
+        addDefinedNodes();
+
+        Node salesman3 = new Node(30, "Secretary Substitute");
+        binaryTree.insertNode(salesman3);
+
+        printTree();
+
+        assertEquals(boss50, binaryTree.getRoot());
+
+        assertEquals(visePres25, binaryTree.getRoot().getLeftChild());
+        assertEquals(salesManager75, binaryTree.getRoot().getRightChild());
+
+        assertEquals(officeManager15, binaryTree.getRoot().getLeftChild().getLeftChild());
+        assertEquals(salesman3, binaryTree.getRoot().getLeftChild().getRightChild());
+
+        assertNull(binaryTree.getRoot().getLeftChild().getLeftChild().getLeftChild());
+        assertNull(binaryTree.getRoot().getLeftChild().getLeftChild().getRightChild());
+
+        assertNull(binaryTree.getRoot().getLeftChild().getRightChild().getLeftChild());
+        assertNull(binaryTree.getRoot().getLeftChild().getRightChild().getRightChild());
+
+        assertNull(binaryTree.getRoot().getRightChild().getLeftChild());
+        assertEquals(salesman85, binaryTree.getRoot().getRightChild().getRightChild());
+
+        assertNull(binaryTree.getRoot().getRightChild().getRightChild().getLeftChild());
+        assertNull(binaryTree.getRoot().getRightChild().getRightChild().getRightChild());
     }
 
     @Test
@@ -68,8 +144,8 @@ public class BinaryTreeTest {
         Node foundNodeOfficeManager = binaryTree.findNodeByKey(binaryTree.getRoot(), 15);
         Node foundBoss = binaryTree.findNodeByKey(binaryTree.getRoot(), 50);
 
-        assertEquals(officeManager, foundNodeOfficeManager);
-        assertEquals(boss, foundBoss);
+        assertEquals(officeManager15, foundNodeOfficeManager);
+        assertEquals(boss50, foundBoss);
     }
 
     @Test
@@ -79,53 +155,27 @@ public class BinaryTreeTest {
         Node foundNodeOfficeManager = binaryTree.findNodeByKey(15);
         Node foundBoss = binaryTree.findNodeByKey(binaryTree.getRoot(), 50);
 
-        assertEquals(officeManager, foundNodeOfficeManager);
-        assertEquals(boss, foundBoss);
+        assertEquals(officeManager15, foundNodeOfficeManager);
+        assertEquals(boss50, foundBoss);
     }
 
-    @Test
-    public void testInsertNode() throws Exception {
-        addDefinedNodes();
-
-        Node salesman2 = new Node(60, "Salesman 2");
-        binaryTree.insertNode(salesman2);
-
-        Node foundNode = binaryTree.findNodeByKey(binaryTree.getRoot(), salesman2.getKey());
-        assertEquals(salesman2, foundNode);
-
-    }
-
-    @Test
-    public void testOverrideNode() throws Exception {
-        addDefinedNodes();
-
-        Node salesman3 = new Node(30, "Secretary Substitute");
-        binaryTree.insertNode(salesman3);
-
-        Node foundNode = binaryTree.findNodeByKey(binaryTree.getRoot(), salesman3.getKey());
-        assertEquals(salesman3, foundNode);
-        assertEquals(salesman3.getKey(), foundNode.getKey());
-        assertNotEquals(secretary, foundNode);
-        assertEquals(secretary.getKey(), foundNode.getKey());
-    }
-
-//    @Test
+    //    @Test
     public void testRemoveNodeWithBothChildern() throws Exception {
         addDefinedNodes();
 
-        binaryTree.removeNode(visePres.getKey());
+        binaryTree.removeNode(visePres25.getKey());
 
-        assertEquals(boss, binaryTree.getRoot());
-        assertEquals(officeManager, binaryTree.getRoot().getLeftChild());
-        assertEquals(secretary, binaryTree.getRoot().getRightChild());
+        assertEquals(boss50, binaryTree.getRoot());
+        assertEquals(officeManager15, binaryTree.getRoot().getLeftChild());
+        assertEquals(secretary30, binaryTree.getRoot().getRightChild());
 
         assertNull(binaryTree.getRoot().getLeftChild().getLeftChild().getLeftChild());
         assertNull(binaryTree.getRoot().getLeftChild().getLeftChild().getRightChild());
 
-        assertEquals(salesManager, binaryTree.getRoot().getRightChild());
+        assertEquals(salesManager75, binaryTree.getRoot().getRightChild());
 
         assertNull(binaryTree.getRoot().getRightChild().getLeftChild());
-        assertEquals(salesman1, binaryTree.getRoot().getRightChild().getRightChild());
+        assertEquals(salesman85, binaryTree.getRoot().getRightChild().getRightChild());
         assertNull(binaryTree.getRoot().getRightChild().getRightChild().getLeftChild());
         assertNull(binaryTree.getRoot().getRightChild().getRightChild().getRightChild());
     }
@@ -134,39 +184,37 @@ public class BinaryTreeTest {
     public void testRemoveMiddleNodeWithoutChildren() throws Exception {
         addDefinedNodes();
 
-        binaryTree.removeNode(officeManager.getKey());
+        binaryTree.removeNode(officeManager15.getKey());
 
-        assertEquals(boss, binaryTree.getRoot());
-        assertEquals(visePres, binaryTree.getRoot().getLeftChild());
-        assertEquals(salesManager, binaryTree.getRoot().getRightChild());
+        assertEquals(boss50, binaryTree.getRoot());
+        assertEquals(visePres25, binaryTree.getRoot().getLeftChild());
+        assertEquals(salesManager75, binaryTree.getRoot().getRightChild());
 
         assertNull(binaryTree.getRoot().getLeftChild().getLeftChild());
-        assertNull(binaryTree.getRoot().getLeftChild().getLeftChild());
-
-        assertEquals(salesManager, binaryTree.getRoot().getRightChild());
-        assertNull(binaryTree.getRoot().getRightChild().getLeftChild());
+        assertEquals(secretary30, binaryTree.getRoot().getLeftChild().getRightChild());
 
         assertNull(binaryTree.getRoot().getRightChild().getLeftChild());
-        assertEquals(salesman1, binaryTree.getRoot().getRightChild().getRightChild());
+
+        assertEquals(salesman85, binaryTree.getRoot().getRightChild().getRightChild());
         assertNull(binaryTree.getRoot().getRightChild().getRightChild().getLeftChild());
         assertNull(binaryTree.getRoot().getRightChild().getRightChild().getRightChild());
     }
 
-//    @Test
+    //    @Test
     public void testRemoveMiddleNodeWithoutLeftChild() throws Exception {
         addDefinedNodes();
 
         binaryTree.inOrderTraverseTree(binaryTree.getRoot());
 
-        binaryTree.removeNode(salesManager.getKey());
+        binaryTree.removeNode(salesManager75.getKey());
         System.out.println("=================================");
 
         binaryTree.inOrderTraverseTree(binaryTree.getRoot());
 
-        assertEquals(boss, binaryTree.getRoot());
-        assertEquals(visePres, binaryTree.getRoot().getLeftChild());
-        assertEquals(officeManager, binaryTree.getRoot().getLeftChild().getLeftChild());
-        assertEquals(secretary, binaryTree.getRoot().getLeftChild().getRightChild());
+        assertEquals(boss50, binaryTree.getRoot());
+        assertEquals(visePres25, binaryTree.getRoot().getLeftChild());
+        assertEquals(officeManager15, binaryTree.getRoot().getLeftChild().getLeftChild());
+        assertEquals(secretary30, binaryTree.getRoot().getLeftChild().getRightChild());
 
         assertNull(binaryTree.getRoot().getLeftChild().getLeftChild().getLeftChild());
         assertNull(binaryTree.getRoot().getLeftChild().getLeftChild().getRightChild());
@@ -174,7 +222,7 @@ public class BinaryTreeTest {
         assertNull(binaryTree.getRoot().getRightChild());
 
         assertNull(binaryTree.getRoot().getRightChild().getLeftChild());
-        assertEquals(salesman1, binaryTree.getRoot().getRightChild().getRightChild());
+        assertEquals(salesman85, binaryTree.getRoot().getRightChild().getRightChild());
         assertNull(binaryTree.getRoot().getRightChild().getRightChild().getLeftChild());
         assertNull(binaryTree.getRoot().getRightChild().getRightChild().getRightChild());
     }

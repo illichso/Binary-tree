@@ -45,35 +45,16 @@ public class BinaryTree {
         }
     }
 
-    public Node findNodeByKey(Node node, int key) {
-        if (node == null) {
-            return null;
-        }
-        if (key == node.getKey()) {
-            return node;
-        } else if (key > node.getKey()) {
-            return findNodeByKey(node.getRightChild(), key);
-        } else {
-            return findNodeByKey(node.getLeftChild(), key);
-        }
-    }
-
-
-    public Node findNodeByKey(int key) {
+    public Node findNode(int key) {
         Node focusNode = root;
-        if (root == null) {
-            return null;
-        }
-
-        while (true) {
-            if (focusNode.getKey() == key) {
-                return focusNode;
-            } else if (key > focusNode.getKey()) {
+        while (focusNode != null && focusNode.getKey() != key) {
+            if (key > focusNode.getKey()) {
                 focusNode = focusNode.getRightChild();
             } else if (key < focusNode.getKey()) {
                 focusNode = focusNode.getLeftChild();
             }
         }
+        return focusNode;
     }
 
 

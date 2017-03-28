@@ -247,7 +247,7 @@ public class BinaryTreeTest {
         assertNull(binaryTree.getRoot().getRightChild().getRightChild().getRightChild());
     }
 
-    //    @Test
+        @Test
     public void testRemoveMiddleNodeWithoutLeftChild() throws Exception {
         addDefinedNodes();
         printTree();

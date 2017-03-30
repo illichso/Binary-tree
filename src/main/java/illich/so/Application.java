@@ -13,5 +13,4 @@ public class Application {
 
         theTree.inOrderTraverseTree(theTree.getRoot());
     }
-
 }

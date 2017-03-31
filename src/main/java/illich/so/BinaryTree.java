@@ -87,47 +87,76 @@ public class BinaryTree {
     }
 
     public void removeNode(int key) {
-        if (root == null) {
-            return;
-        }
         Node focusNode = root;
         Node parent;
-
         while (true) {
             parent = focusNode;
-            if (key == focusNode.getKey()) {
-                removeSpecifiedNode(parent, focusNode);
-                return;
-            } else if (key < focusNode.getKey()) {
+            if (focusNode != null && key == focusNode.getKey()) {
+                if (focusNode.getRightChild() != null) {
+                    if (focusNode.getLeftChild() != null) {
+                        Node leftFocusNode = focusNode.getLeftChild();
+                        focusNode = focusNode.getRightChild();
+                        focusNode.setLeftChild(leftFocusNode);
+                        return;
+                    } else {
+                        focusNode = focusNode.getRightChild();
+                        return;
+                    }
+                } else {
+                    focusNode = null;
+                    return;
+                }
+            } else if (focusNode != null && key < focusNode.getKey() && focusNode.getLeftChild() != null) {
                 focusNode = focusNode.getLeftChild();
-                if (focusNode.getKey() == key) {
-                    removeSpecifiedNode(parent, focusNode);
-                    return;
-                }
-            } else {
+            } else if (focusNode != null && key > focusNode.getKey() && focusNode.getRightChild() != null) {
                 focusNode = focusNode.getRightChild();
-                if (focusNode.getKey() == key) {
-                    removeSpecifiedNode(parent, focusNode);
-                    return;
-                }
             }
         }
+
     }
 
-    private void removeSpecifiedNode(Node parent, Node focusNode) {
-        if (focusNode.getLeftChild() == null && focusNode.getRightChild() == null) {
-            parent.setLeftChild(null);
-        } else if (focusNode.getLeftChild() == null && focusNode.getRightChild() != null) {
-            parent.setLeftChild(focusNode.getRightChild());
-        } else if (focusNode.getLeftChild() != null && focusNode.getRightChild() == null) {
-            parent.setLeftChild(focusNode.getLeftChild());
-        } else {
-            if (focusNode.getRightChild().getLeftChild() == null) {
-                focusNode.getRightChild().setLeftChild(focusNode.getLeftChild());
-                parent.setLeftChild(focusNode.getRightChild());
-            } else {
-                System.out.println(focusNode);
-            }
-        }
-    }
+//    public void removeNode(int key) {
+//        if (root == null) {
+//            return;
+//        }
+//        Node focusNode = root;
+//        Node parent;
+//
+//        while (true) {
+//            parent = focusNode;
+//            if (key == focusNode.getKey()) {
+//                removeSpecifiedNode(parent, focusNode);
+//                return;
+//            } else if (key < focusNode.getKey()) {
+//                focusNode = focusNode.getLeftChild();
+//                if (focusNode.getKey() == key) {
+//                    removeSpecifiedNode(parent, focusNode);
+//                    return;
+//                }
+//            } else {
+//                focusNode = focusNode.getRightChild();
+//                if (focusNode.getKey() == key) {
+//                    removeSpecifiedNode(parent, focusNode);
+//                    return;
+//                }
+//            }
+//        }
+//    }
+//
+//    private void removeSpecifiedNode(Node parent, Node focusNode) {
+//        if (focusNode.getLeftChild() == null && focusNode.getRightChild() == null) {
+//            parent.setLeftChild(null);
+//        } else if (focusNode.getLeftChild() == null && focusNode.getRightChild() != null) {
+//            parent.setLeftChild(focusNode.getRightChild());
+//        } else if (focusNode.getLeftChild() != null && focusNode.getRightChild() == null) {
+//            parent.setLeftChild(focusNode.getLeftChild());
+//        } else {
+//            if (focusNode.getRightChild().getLeftChild() == null) {
+//                focusNode.getRightChild().setLeftChild(focusNode.getLeftChild());
+//                parent.setLeftChild(focusNode.getRightChild());
+//            } else {
+//                System.out.println(focusNode);
+//            }
+//        }
+//    }
 }

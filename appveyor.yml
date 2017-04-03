@@ -7,9 +7,9 @@ build:
   verbosity: quiet
 
 install:
-  - cup all -v
-  - cinst -y jdk8 nodejs.install
-  - refreshenv
+#  - cup all -v
+#  - cinst -y jdk8 nodejs.install
+#  - refreshenv
   - java -version
 
 test_script:

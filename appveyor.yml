@@ -7,11 +7,7 @@ build:
   verbosity: quiet
 
 install:
-  - cup all -v
-  - cinst -y maven
-  - refreshenv
   - java -version
-  - mvn -version
   - dir
   - echo %cd%
 

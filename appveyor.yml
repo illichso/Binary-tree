@@ -7,9 +7,7 @@ build:
   verbosity: quiet
 
 install:
-  - java -version
-  - echo %cd%
-  - dir
+  - mvn -version
 
 build_script:
   - mvn clean install

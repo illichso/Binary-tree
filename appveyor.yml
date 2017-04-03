@@ -11,6 +11,8 @@ install:
 #  - cinst -y jdk8 nodejs.install
 #  - refreshenv
   - java -version
+  - dir
+  - echo %cd%
 
 test_script:
   - mvn clean install

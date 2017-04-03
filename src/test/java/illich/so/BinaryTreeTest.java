@@ -282,4 +282,11 @@ public class BinaryTreeTest {
 
         assertEquals("depth for root node is corrent", 2, bossDepth);
     }
+
+    @Test
+    public void testFindDepthForUnExistingNode() throws Exception {
+        int bossDepth = binaryTree.findDepth(new Node(1000, ""));
+
+        assertEquals("depth for root node is corrent", -1, bossDepth);
+    }
 }

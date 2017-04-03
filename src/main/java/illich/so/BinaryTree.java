@@ -173,50 +173,24 @@ public class BinaryTree {
 
     public int findDepth(Node node) {
         int result = -1;
-        if (node == null) {
-            return result;
-        }
-        result++;
+        boolean found = false;
         Node focusNode = root;
-        while (focusNode != null && focusNode.getKey() != node.getKey()) {
+        while (true) {
+            if (node == null || focusNode == null) {
+                break;
+            }
             result++;
-            if (node.getKey() < focusNode.getKey()) {
+            if (node.getKey() == focusNode.getKey()) {
+                found = true;
+                break;
+            } else if (node.getKey() < focusNode.getKey()) {
                 focusNode = focusNode.getLeftChild();
             } else {
                 focusNode = focusNode.getRightChild();
             }
         }
-        return result;
 
-//        int result = -1;
-//        if (node == null) {
-//            return result;
-//        }
-//        result++;
-//        if (node.getKey() == root.getKey()) {
-//            return result;
-//        }
-//
-//        Node parentNode = root;
-//        Node focusNode;
-//        while (true) {
-//            result++;
-//            focusNode = parentNode;
-//            if (node.getKey() < focusNode.getKey()) {
-//                focusNode = focusNode.getLeftChild();
-//                if (focusNode.getKey() == node.getKey()) {
-//                    parentNode = focusNode;
-//                    return result;
-//                }
-//            } else {
-//                focusNode = focusNode.getRightChild();
-//                if (focusNode.getKey() == node.getKey()) {
-//                    parentNode = focusNode;
-//                    return result;
-//                }
-//            }
-//
-//        }
+        return found ? result : -1;
+
     }
-
 }

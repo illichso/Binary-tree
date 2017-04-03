@@ -86,6 +86,13 @@ public class BinaryTree {
 
     }
 
+    public int getDepth(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        return 1 + Math.max(getDepth(node.getLeftChild()), getDepth(node.getRightChild()));
+    }
+
     public boolean removeNode(int key) {
         Node focusNode = root;
         Node parent = root;
@@ -151,13 +158,13 @@ public class BinaryTree {
         Node replacement = replacedNode;
         Node focusNode = replacedNode.getRightChild();
 
-        while(focusNode != null){
+        while (focusNode != null) {
             replacementParent = replacement;
             replacement = focusNode;
             focusNode = focusNode.getLeftChild();
         }
 
-        if(replacement != replacedNode.getRightChild()){
+        if (replacement != replacedNode.getRightChild()) {
             replacementParent.setLeftChild(replacement.getRightChild());
             replacement.setRightChild(replacedNode.getRightChild());
         }

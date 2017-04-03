@@ -254,34 +254,6 @@ public class BinaryTreeTest {
         printTree();
 
         assertEquals(visePres25, binaryTree.getRoot().getLeftChild());
-        assertEquals(salesManager75, binaryTree.getRoot().getRightChild());
-
-        assertEquals(officeManager15, binaryTree.getRoot().getLeftChild().getLeftChild());
-        assertEquals(secretary30, binaryTree.getRoot().getLeftChild().getRightChild());
-
-        assertNull(binaryTree.getRoot().getLeftChild().getLeftChild().getLeftChild());
-        assertNull(binaryTree.getRoot().getLeftChild().getLeftChild().getRightChild());
-
-        assertNull(binaryTree.getRoot().getLeftChild().getRightChild().getLeftChild());
-        assertNull(binaryTree.getRoot().getLeftChild().getRightChild().getRightChild());
-
-        assertNull(binaryTree.getRoot().getRightChild().getLeftChild());
-        assertEquals(salesman85, binaryTree.getRoot().getRightChild().getRightChild());
-
-        assertNull(binaryTree.getRoot().getRightChild().getRightChild().getLeftChild());
-        assertNull(binaryTree.getRoot().getRightChild().getRightChild().getRightChild());
-    }
-
-        @Test
-    public void testRemoveMiddleNodeWithoutLeftChild() throws Exception {
-        addDefinedNodes();
-        printTree();
-        binaryTree.removeNode(salesManager75.getKey());
-        printTree();
-
-        assertEquals(boss50, binaryTree.getRoot());
-
-        assertEquals(visePres25, binaryTree.getRoot().getLeftChild());
         assertEquals(salesman85, binaryTree.getRoot().getRightChild());
 
         assertEquals(officeManager15, binaryTree.getRoot().getLeftChild().getLeftChild());
@@ -295,5 +267,36 @@ public class BinaryTreeTest {
 
         assertNull(binaryTree.getRoot().getRightChild().getLeftChild());
         assertNull(binaryTree.getRoot().getRightChild().getRightChild());
+    }
+
+        @Test
+    public void testRemoveMiddleNodeWithoutLeftChild() throws Exception {
+        addDefinedNodes();
+        printTree();
+        binaryTree.removeNode(salesManager75.getKey());
+        printTree();
+
+        assertEquals(boss50, binaryTree.getRoot());
+
+        assertEquals(visePres25, binaryTree.getRoot().getLeftChild());
+        assertNull(binaryTree.getRoot().getRightChild());
+
+        assertEquals(officeManager15, binaryTree.getRoot().getLeftChild().getLeftChild());
+        assertEquals(secretary30, binaryTree.getRoot().getLeftChild().getRightChild());
+
+        assertNull(binaryTree.getRoot().getLeftChild().getLeftChild().getLeftChild());
+        assertNull(binaryTree.getRoot().getLeftChild().getLeftChild().getRightChild());
+
+        assertNull(binaryTree.getRoot().getLeftChild().getRightChild().getLeftChild());
+        assertNull(binaryTree.getRoot().getLeftChild().getRightChild().getRightChild());
+    }
+
+    @Test
+    public void testGetDepth() throws Exception {
+        addDefinedNodes();
+        printTree();
+        int result = binaryTree.getDepth(binaryTree.getRoot());
+        assertEquals("Size is right", 3, result);
+
     }
 }

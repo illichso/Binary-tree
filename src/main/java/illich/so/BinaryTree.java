@@ -171,115 +171,52 @@ public class BinaryTree {
         return replacement;
     }
 
-//    public void removeNode(int key) {
-//        Node focusNode = root;
-//        Node parent;
+    public int findDepth(Node node) {
+        int result = -1;
+        if (node == null) {
+            return result;
+        }
+        result++;
+        Node focusNode = root;
+        while (focusNode != null && focusNode.getKey() != node.getKey()) {
+            result++;
+            if (node.getKey() < focusNode.getKey()) {
+                focusNode = focusNode.getLeftChild();
+            } else {
+                focusNode = focusNode.getRightChild();
+            }
+        }
+        return result;
+
+//        int result = -1;
+//        if (node == null) {
+//            return result;
+//        }
+//        result++;
+//        if (node.getKey() == root.getKey()) {
+//            return result;
+//        }
 //
+//        Node parentNode = root;
+//        Node focusNode;
 //        while (true) {
-//            parent = focusNode;
-//            if (key < focusNode.getKey()) {
+//            result++;
+//            focusNode = parentNode;
+//            if (node.getKey() < focusNode.getKey()) {
 //                focusNode = focusNode.getLeftChild();
-//                if (focusNode.getKey() == key) {
-//                    if (focusNode.getLeftChild() != null) {
-//                        Node leftFocusNode = focusNode.getLeftChild();
-//                        focusNode = focusNode.getRightChild();
-//                        focusNode.setLeftChild(leftFocusNode);
-//                        parent.setLeftChild(focusNode);
-//                        return;
-//                    } else {
-//                        focusNode = focusNode.getRightChild();
-//                        parent.setLeftChild(focusNode);
-//                    }
-//                    parent.setLeftChild(focusNode);
-//                    return;
+//                if (focusNode.getKey() == node.getKey()) {
+//                    parentNode = focusNode;
+//                    return result;
 //                }
 //            } else {
 //                focusNode = focusNode.getRightChild();
-//                if (focusNode.getKey() == key) {
-//                    if (focusNode.getRightChild() != null) {
-//                        Node leftFocusNode = focusNode.getLeftChild();
-//                        focusNode = focusNode.getRightChild();
-//                        focusNode.setLeftChild(leftFocusNode);
-//                        parent.setLeftChild(focusNode);
-//                        return;
-//                    } else {
-//                        focusNode = focusNode.getRightChild();
-//                        parent.setLeftChild(focusNode);
-//                    }
-//                    parent.setLeftChild(focusNode);
-//                    return;
+//                if (focusNode.getKey() == node.getKey()) {
+//                    parentNode = focusNode;
+//                    return result;
 //                }
 //            }
+//
 //        }
-//
-////        while (true) {
-////            parent = focusNode;
-////            if (focusNode != null && key == focusNode.getKey()) {
-////                if (focusNode.getRightChild() != null) {
-////                    if (focusNode.getLeftChild() != null) {
-////                        Node leftFocusNode = focusNode.getLeftChild();
-////                        focusNode = focusNode.getRightChild();
-////                        focusNode.setLeftChild(leftFocusNode);
-////                        return;
-////                    } else {
-////                        focusNode = focusNode.getRightChild();
-////                        return;
-////                    }
-////                } else {
-////                    focusNode = null;
-////                    return;
-////                }
-////            } else if (focusNode != null && key < focusNode.getKey() && focusNode.getLeftChild() != null) {
-////                focusNode = focusNode.getLeftChild();
-////            } else if (focusNode != null && key > focusNode.getKey() && focusNode.getRightChild() != null) {
-////                focusNode = focusNode.getRightChild();
-////            }
-////        }
-//
-////    }
-//
-////    public void removeNode(int key) {
-////        if (root == null) {
-////            return;
-////        }
-////        Node focusNode = root;
-////        Node parent;
-////
-////        while (true) {
-////            parent = focusNode;
-////            if (key == focusNode.getKey()) {
-////                removeSpecifiedNode(parent, focusNode);
-////                return;
-////            } else if (key < focusNode.getKey()) {
-////                focusNode = focusNode.getLeftChild();
-////                if (focusNode.getKey() == key) {
-////                    removeSpecifiedNode(parent, focusNode);
-////                    return;
-////                }
-////            } else {
-////                focusNode = focusNode.getRightChild();
-////                if (focusNode.getKey() == key) {
-////                    removeSpecifiedNode(parent, focusNode);
-////                    return;
-////                }
-////            }
-////        }
-////    }
-////
-////    private void removeSpecifiedNode(Node parent, Node focusNode) {
-////        if (focusNode.getLeftChild() == null && focusNode.getRightChild() == null) {
-////            parent.setLeftChild(null);
-////        } else if (focusNode.getLeftChild() == null && focusNode.getRightChild() != null) {
-////            parent.setLeftChild(focusNode.getRightChild());
-////        } else if (focusNode.getLeftChild() != null && focusNode.getRightChild() == null) {
-////            parent.setLeftChild(focusNode.getLeftChild());
-////        } else {
-////            if (focusNode.getRightChild().getLeftChild() == null) {
-////                focusNode.getRightChild().setLeftChild(focusNode.getLeftChild());
-////                parent.setLeftChild(focusNode.getRightChild());
-////            } else {
-////                System.out.println(focusNode);
-////            }
-////        }
-////    }
+    }
+
 }

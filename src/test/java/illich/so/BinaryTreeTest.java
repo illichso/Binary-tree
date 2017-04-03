@@ -29,6 +29,7 @@ public class BinaryTreeTest {
     @Before
     public void setUp() throws Exception {
         binaryTree = new BinaryTree();
+        addDefinedNodes();
     }
 
     private void addDefinedNodes() {
@@ -38,8 +39,6 @@ public class BinaryTreeTest {
         binaryTree.addNode(secretary30.getKey(), secretary30.getName());
         binaryTree.addNode(salesManager75.getKey(), salesManager75.getName());
         binaryTree.addNode(salesman85.getKey(), salesman85.getName());
-
-        printTree();
     }
 
     private void printTree() {
@@ -49,8 +48,6 @@ public class BinaryTreeTest {
 
     @Test
     public void testCreateBinaryTree() throws Exception {
-        addDefinedNodes();
-
         assertEquals(boss50, binaryTree.getRoot());
 
         assertEquals(visePres25, binaryTree.getRoot().getLeftChild());
@@ -74,13 +71,9 @@ public class BinaryTreeTest {
 
     @Test
     public void testAddNode() throws Exception {
-        addDefinedNodes();
-
         Node salesman3 = new Node(35, "Secretary2");
 
         binaryTree.addNode(salesman3.getKey(), salesman3.getName());
-
-        printTree();
 
         assertEquals(boss50, binaryTree.getRoot());
 
@@ -108,13 +101,9 @@ public class BinaryTreeTest {
 
     @Test
     public void testInsertNode() throws Exception {
-        addDefinedNodes();
-
         Node salesman3 = new Node(35, "Secretary2");
 
         binaryTree.insertNode(salesman3);
-
-        printTree();
 
         assertEquals(boss50, binaryTree.getRoot());
 
@@ -142,12 +131,8 @@ public class BinaryTreeTest {
 
     @Test
     public void testAddNodeWithTheSameKey() throws Exception {
-        addDefinedNodes();
-
         Node salesman3 = new Node(30, "Secretary Substitute");
         binaryTree.addNode(salesman3.getKey(), salesman3.getName());
-
-        printTree();
 
         assertEquals(boss50, binaryTree.getRoot());
 
@@ -172,12 +157,8 @@ public class BinaryTreeTest {
 
     @Test
     public void testInsertNodeWithTheSameKey() throws Exception {
-        addDefinedNodes();
-
         Node salesman3 = new Node(30, "Secretary Substitute");
         binaryTree.insertNode(salesman3);
-
-        printTree();
 
         assertEquals(boss50, binaryTree.getRoot());
 
@@ -222,11 +203,7 @@ public class BinaryTreeTest {
 
     @Test
     public void testRemoveMiddleNodeWithoutChildren() throws Exception {
-        addDefinedNodes();
-
         binaryTree.removeNode(officeManager15.getKey());
-
-        printTree();
 
         assertEquals(boss50, binaryTree.getRoot());
 
@@ -248,10 +225,7 @@ public class BinaryTreeTest {
 
     @Test
     public void testRemoveRoot() throws Exception {
-        addDefinedNodes();
-        printTree();
         binaryTree.removeNode(boss50.getKey());
-        printTree();
 
         assertEquals(visePres25, binaryTree.getRoot().getLeftChild());
         assertEquals(salesman85, binaryTree.getRoot().getRightChild());
@@ -269,12 +243,9 @@ public class BinaryTreeTest {
         assertNull(binaryTree.getRoot().getRightChild().getRightChild());
     }
 
-        @Test
+    @Test
     public void testRemoveMiddleNodeWithoutLeftChild() throws Exception {
-        addDefinedNodes();
-        printTree();
         binaryTree.removeNode(salesManager75.getKey());
-        printTree();
 
         assertEquals(boss50, binaryTree.getRoot());
 
@@ -293,10 +264,22 @@ public class BinaryTreeTest {
 
     @Test
     public void testGetDepth() throws Exception {
-        addDefinedNodes();
-        printTree();
         int result = binaryTree.getDepth(binaryTree.getRoot());
         assertEquals("Size is right", 3, result);
 
+    }
+
+    @Test
+    public void testFindDepthForRootNode() throws Exception {
+        int bossDepth = binaryTree.findDepth(boss50);
+
+        assertEquals("depth for root node is corrent", 0, bossDepth);
+    }
+
+    @Test
+    public void testFindDepthForOfficeManager15Node() throws Exception {
+        int bossDepth = binaryTree.findDepth(officeManager15);
+
+        assertEquals("depth for root node is corrent", 2, bossDepth);
     }
 }

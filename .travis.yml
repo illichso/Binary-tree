@@ -15,4 +15,5 @@ matrix:
       osx_image: xcode8.2
 
 script:
+  - mvn -version
   - mvn clean install

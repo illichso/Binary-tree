@@ -10,6 +10,10 @@ install:
   - java -version
   - dir
   - echo %cd%
+  - mvn clean install
+
+build_script:
+  - mvn clean install
 
 test_script:
   - mvn clean install
